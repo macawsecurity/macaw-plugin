@@ -1,0 +1,9 @@
+{
+  "name": "macaw-cc",
+  "description": "Every prompt, tool call, MCP call, skill load and data access in Claude Code passes through MACAW first. Data stays on your device. /macaw-cc:observe to report it. /macaw-cc:protect to get approvals or block.",
+  "version": "0.2.2.6",
+  "author": {
+    "name": "MACAW"
+  },
+  "license": "Apache-2.0"
+}

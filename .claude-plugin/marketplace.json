@@ -1,0 +1,19 @@
+{
+  "name": "macaw",
+  "owner": {
+    "name": "MACAW"
+  },
+  "description": "Deterministic controls for agent harnesses - Claude Code and Codex. Track what your agent does, control what it may do.",
+  "plugins": [
+    {
+      "name": "macaw-cc",
+      "source": "./plugins/macaw-cc",
+      "description": "Every prompt, tool call, MCP call, skill load and data access in Claude Code passes through MACAW first. Data stays on your device. /macaw-cc:observe to report it. /macaw-cc:protect to get approvals or block."
+    },
+    {
+      "name": "macaw-cx",
+      "source": "./plugins/macaw-cx",
+      "description": "Every prompt, tool call, MCP call, skill load and data access in Codex passes through MACAW first. Data stays on your device. Ask what your agent did, or ask to turn on blocking."
+    }
+  ]
+}

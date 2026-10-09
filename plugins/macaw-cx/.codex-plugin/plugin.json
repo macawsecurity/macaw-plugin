@@ -1,0 +1,6 @@
+{
+  "name": "macaw-cx",
+  "description": "Every prompt, tool call, MCP call, skill load and data access in Codex passes through MACAW first. Data stays on your device. Ask what your agent did, or ask to turn on blocking.",
+  "version": "0.2.2.6",
+  "license": "Apache-2.0"
+}
