@@ -49,25 +49,29 @@ your agent could reach them.
 Free. First run spins up your workspace: a link appears here, you
 click it, that's the account.
 
-Afterwards, turn this plugin off - the install records the same
-calls, so leaving both on writes everything twice:
-  claude plugin disable macaw-cc@macaw
+The install offers to turn this plugin off. Say yes - it records
+the same calls, so leaving both on writes everything twice.
 
 Run it?
 ```
 
 **3 — start it, and relay the link**
 
-Only after they agree. Start it detached so its output is readable while it
-waits:
+Only after they agree. Install the package, then start the install detached so
+its output is readable while it waits:
 
 ```bash
-mkdir -p ~/.macaw && npx macaw-ai install > ~/.macaw/install.log 2>&1 &
+npm install -g @macaw-ai/coding-agents >/dev/null 2>&1
+mkdir -p ~/.macaw && macaw-sidecar install --activate > ~/.macaw/install.log 2>&1 &
 ```
 
-Then read `~/.macaw/install.log` every few seconds until a line beginning
-`Open` appears, for up to a minute. Relay that URL and the code beside it
-plainly, and say you are waiting.
+`--activate` is what asks for a new workspace. Without it an install with
+nothing attached to answer will stop rather than print a link, because it
+cannot tell a backgrounded install from a script nobody is watching.
+
+Then read `~/.macaw/install.log` every few seconds until a line with a URL on
+it appears, for up to a minute. Relay that URL and the code beside it plainly,
+and say you are waiting.
 
 Do not open the URL, fetch it, or try to approve it yourself. Approval
 happening somewhere this session cannot reach is the whole point of it.
@@ -79,8 +83,9 @@ every ten seconds or so for up to ten minutes. It will sit on
 `Waiting for approval...` until they have clicked through, which is expected.
 
 When it finishes, report the workspace name it printed and tell them to start
-their agent with `./secCC` rather than `claude` - that is what routes the model
-through the sidecar. Tool calls are gated either way.
+their agent with `secCC` rather than `claude`. Both are gated - the hooks are
+in the directory either way - but `secCC` also starts the sidecar if it is not
+running, and the hooks block every call when it is not.
 
 If it fails, show the error as it came out. Do not retry with different
 arguments and do not work around it.

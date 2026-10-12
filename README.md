@@ -162,12 +162,12 @@ empty body, and a block needs a non-empty stderr or Codex proceeds.
 /macaw-cc:protect
 ```
 
-Walks through `npx macaw-ai install` — it fetches the binary, creates a
-workspace you approve in a browser, and registers hooks that can block. Or run
-it yourself:
+Walks through the install — it fetches the binary, creates a workspace you
+approve in a browser, and registers hooks that can block. Or run it yourself:
 
 ```bash
-npx macaw-ai install
+npm install -g @macaw-ai/coding-agents
+macaw-sidecar install
 macaw-sidecar --status      # Sidecar: running (pid …, port 18820)
 ```
 
@@ -190,7 +190,7 @@ at `PreToolUse`, but the load is not.
 **The model calls are not visible to a plugin.** Hooks see tool calls; routing
 the conversation itself through the sidecar needs `ANTHROPIC_BASE_URL`, and a
 plugin manifest carries hooks and nothing else. So this records what the agent
-did, never what it was asked or answered. `npx macaw-ai install` adds that,
+did, never what it was asked or answered. Installing the binary adds that,
 because it writes the setting and launches the harness itself.
 
 ## Research

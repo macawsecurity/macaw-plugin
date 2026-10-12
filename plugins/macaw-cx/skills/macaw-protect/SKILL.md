@@ -62,15 +62,20 @@ Run it?
 
 **3 — start it, and relay the link**
 
-Only after they agree. Start it detached so its output is readable while it
-waits:
+Only after they agree. Install the package, then start the install detached
+so its output is readable while it waits:
 
 ```bash
-mkdir -p ~/.macaw && npx macaw-ai install > ~/.macaw/install.log 2>&1 &
+npm install -g @macaw-ai/coding-agents >/dev/null 2>&1
+mkdir -p ~/.macaw && macaw-sidecar install --activate > ~/.macaw/install.log 2>&1 &
 ```
 
-Then read `~/.macaw/install.log` every few seconds until a line beginning
-`Open` appears, for up to a minute. Relay that URL and the code beside it
+`--activate` is what asks for a new workspace. Without it an install with
+nothing attached to answer will stop rather than print a link, because it
+cannot tell a backgrounded install from a script nobody is watching.
+
+Then read `~/.macaw/install.log` every few seconds until a line with a URL on
+it appears, for up to a minute. Relay that URL and the code beside it
 plainly, and say you are waiting.
 
 Do not open the URL, fetch it, or try to approve it yourself. Approval
@@ -83,8 +88,9 @@ every ten seconds or so for up to ten minutes. It will sit on
 `Waiting for approval...` until they have clicked through, which is expected.
 
 When it finishes, report the workspace name it printed and tell them to start
-Codex with `./secCodex` rather than `codex` - that is what routes the model
-through the sidecar. Tool calls are gated either way.
+Codex with `secCodex` rather than `codex`. The hooks gate tool calls either
+way, but `secCodex` also carries the model relay, which Codex only reads from
+a user-level config - and it starts the sidecar if it is not running.
 
 If it fails, show the error as it came out. Do not retry with different
 arguments and do not work around it.
