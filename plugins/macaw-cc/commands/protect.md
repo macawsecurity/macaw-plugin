@@ -62,7 +62,7 @@ its output is readable while it waits:
 
 ```bash
 npm install -g @macaw-ai/coding-agents >/dev/null 2>&1
-mkdir -p ~/.macaw && macaw-sidecar install --activate > ~/.macaw/install.log 2>&1 &
+mkdir -p ~/.macaw && macaw-sidecar install --local --activate > ~/.macaw/install.log 2>&1 &
 ```
 
 `--activate` is what asks for a new workspace. Without it an install with

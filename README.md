@@ -91,7 +91,7 @@ container or app as the agent.
 Everything that reaches a sidecar is treated identically in both modes. Only
 "there was nothing to ask" differs:
 
-| | plugin (observe) | `macaw-sidecar --install` (enforce) |
+| | plugin (observe) | `macaw-sidecar install` (enforce) |
 |---|---|---|
 | sidecar unreachable, timeout, HTTP error | record, allow | **block** |
 | sidecar returns nothing | **block** | **block** |
@@ -167,8 +167,9 @@ approve in a browser, and registers hooks that can block. Or run it yourself:
 
 ```bash
 npm install -g @macaw-ai/coding-agents
-macaw-sidecar install
-macaw-sidecar --status      # Sidecar: running (pid …, port 18820)
+macaw-sidecar install --local     # this project
+macaw-sidecar install --system    # every directory; the sidecar runs as a service
+macaw-sidecar --status            # Sidecar: running (pid …, port 18820)
 ```
 
 ## Running Alongside the Binary
