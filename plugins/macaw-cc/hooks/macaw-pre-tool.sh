@@ -43,6 +43,11 @@ TIMEOUT_SECONDS=180
 
 input=$(cat)
 
+# The plugin records; it never asks the sidecar. Deciding is the job of
+# the hooks the sidecar installs, and asking from here as well put every
+# call through two decisions.
+if [ "$MODE" = "observe" ]; then macaw_observe "$input"; exit 0; fi
+
 # Call sidecar: -s silent, -f fail on HTTP errors, -m timeout
 response=$(echo "$input" | curl -sf -m "$TIMEOUT_SECONDS" -X POST \
   -H "Content-Type: application/json" \

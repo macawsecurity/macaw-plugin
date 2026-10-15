@@ -9,6 +9,11 @@ TIMEOUT_SECONDS=5
 
 # See macaw-session-start.sh for why stdout is discarded and why -m is set.
 input=$(cat)
+
+# The plugin records; it never asks the sidecar. Deciding is the job of
+# the hooks the sidecar installs, and asking from here as well put every
+# call through two decisions.
+if [ "$MODE" = "observe" ]; then macaw_observe "$input"; exit 0; fi
 if ! curl -s -f -o /dev/null -m "$TIMEOUT_SECONDS" -X POST \
       -H "Content-Type: application/json" \
       -d "$input" \

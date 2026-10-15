@@ -17,6 +17,11 @@ TIMEOUT_SECONDS=5
 
 input=$(cat)
 
+# The plugin records; it never asks the sidecar. Deciding is the job of
+# the hooks the sidecar installs, and asking from here as well put every
+# call through two decisions.
+if [ "$MODE" = "observe" ]; then macaw_observe "$input"; exit 0; fi
+
 # Fire-and-forget audit logging (timeout prevents hanging). -o /dev/null keeps
 # the response body out of stdout, which the harness reads as hook output.
 if ! curl -sf -m "$TIMEOUT_SECONDS" -o /dev/null -X POST \

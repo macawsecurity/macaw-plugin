@@ -51,6 +51,11 @@ trap 'block "MACAW gate failed unexpectedly - blocked (fail-closed)."' ERR
 
 input=$(cat)
 
+# The plugin records; it never asks the sidecar. Deciding is the job of
+# the hooks the sidecar installs, and asking from here as well put every
+# call through two decisions.
+if [ "$MODE" = "observe" ]; then macaw_observe "$input"; exit 0; fi
+
 # -s silent, -f fail on HTTP >= 400, -m cap below the harness timeout.
 #
 # Wrapped in `if` so the ERR trap does not claim it: a curl failure here is
